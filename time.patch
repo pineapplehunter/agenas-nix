@@ -1,5 +1,5 @@
 diff --git a/src/time/clock_gettime.c b/src/time/clock_gettime.c
-index 4d2ec22f..4e248703 100644
+index 4d2ec22f..8486826f 100644
 --- a/src/time/clock_gettime.c
 +++ b/src/time/clock_gettime.c
 @@ -79,7 +79,7 @@ int __clock_gettime(clockid_t clk, struct timespec *ts)
@@ -7,7 +7,7 @@ index 4d2ec22f..4e248703 100644
  	if (sizeof(time_t) > 4)
  		r = __syscall(SYS_clock_gettime64, clk, ts);
 -	if (SYS_clock_gettime == SYS_clock_gettime64 || r!=-ENOSYS)
-+	if (SYS_clock_gettime == SYS_clock_gettime64 || !r)
++	if (SYS_clock_gettime == SYS_clock_gettime64 || !(r==-ENOSYS||r==-EINVAL))
  		return __syscall_ret(r);
  	long ts32[2];
  	r = __syscall(SYS_clock_gettime, clk, ts32);
