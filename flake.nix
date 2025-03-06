@@ -60,9 +60,18 @@
         in
         {
           inherit (p)
+            bandwhich
+            bottom
+            file
             garage
+            gdb
             git
+            lsof
+            pv
+            strace
+            tinyfetch
             tree
+            watch
             ;
           htop = p.htop.override {
             sensorsSupport = false;
