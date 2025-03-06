@@ -28,8 +28,18 @@
         musl = prev.musl.overrideAttrs (old: {
           patches = (old.patches or [ ]) ++ [ ./time.patch ];
         });
-        garage = prev.garage.overrideAttrs (old: {
+        garage = prev.garage.overrideAttrs (old: rec {
           patches = (old.patches or [ ]) ++ [ ./current_thread.patch ];
+          version = "1.1.0";
+          src = old.src.overrideAttrs {
+            rev = "v${version}";
+            hash = "sha256-ysf/GYR39trXTPRdw8uB6E4YDp4nAR8dbU9k9rQTxz0=";
+          };
+          cargoDeps = old.cargoDeps.overrideAttrs {
+            inherit src;
+            name = "garage-cargo-vendor";
+            cargoHash = "sha256-SkDr/e9YZ3raTGucaiv/RV2zF9tEDIeqZeri6Xk3xsU=";
+          };
         });
         atop = prev.atop.overrideAttrs (old: {
           preConfigure = ''
