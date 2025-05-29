@@ -77,4 +77,11 @@
 
       legacyPackages = eachSystem (p: p);
     };
+
+  nixConfig = {
+    extra-substituters = [ "https://attic.s.ihavenojob.work/shogo" ];
+    extra-trusted-public-keys = [
+      "shogo:dzOG75ufKKljdUzTbGDpTuBmup3/K5RDmr28jb0jHCg="
+    ];
+  };
 }
