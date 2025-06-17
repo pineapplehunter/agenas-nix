@@ -29,9 +29,7 @@
         musl = prev.musl.overrideAttrs (old: {
           patches = (old.patches or [ ]) ++ [ ./time.patch ];
         });
-        garage = prev.garage.overrideAttrs (old: {
-          patches = (old.patches or [ ]) ++ [ ./current_thread.patch ];
-        });
+        garage = final.callPackage ./garage.nix { };
         atop = prev.atop.overrideAttrs (old: {
           preConfigure = ''
             for f in *.{sh,service}; do
